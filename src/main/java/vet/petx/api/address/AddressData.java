@@ -17,4 +17,13 @@ public class AddressData {
     private String state;
     private String number;
     private String complement;
+
+    public AddressData(AddressDataDTO address) {
+        this.city = address.city();
+        this.district = address.district();
+        this.cep = address.cep();
+        this.state = address.state();
+        this.number = address.number();
+        this.complement = address.complement();
+    }
 }

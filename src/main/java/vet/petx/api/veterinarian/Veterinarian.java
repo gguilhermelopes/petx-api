@@ -25,4 +25,12 @@ public class Veterinarian {
     private Specialization specialization;
     @Embedded
     private AddressData address;
+
+    public Veterinarian(VeterinarianDTO obj) {
+        this.name = obj.name();
+        this.email = obj.email();
+        this.crmv = obj.crmv();
+        this.specialization = obj.specialization();
+        this.address = new AddressData(obj.address());
+    }
 }
