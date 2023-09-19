@@ -20,6 +20,7 @@ public class Veterinarian {
     private Long id;
     private String name;
     private String email;
+    private String phone;
     private String crmv;
     @Enumerated(EnumType.ORDINAL)
     private Specialization specialization;
@@ -29,6 +30,7 @@ public class Veterinarian {
     public Veterinarian(VeterinarianDTO obj) {
         this.name = obj.name();
         this.email = obj.email();
+        this.phone = obj.phone();
         this.crmv = obj.crmv();
         this.specialization = obj.specialization();
         this.address = new AddressData(obj.address());
