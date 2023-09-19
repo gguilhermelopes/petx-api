@@ -19,6 +19,7 @@ public class AddressData {
     private String complement;
 
     public AddressData(AddressDataDTO address) {
+        this.street = address.street();
         this.city = address.city();
         this.district = address.district();
         this.cep = address.cep();
