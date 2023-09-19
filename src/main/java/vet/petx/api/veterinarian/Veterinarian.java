@@ -27,7 +27,7 @@ public class Veterinarian {
     @Embedded
     private AddressData address;
 
-    public Veterinarian(VeterinarianDTO obj) {
+    public Veterinarian(VeterinarianDTOInsert obj) {
         this.name = obj.name();
         this.email = obj.email();
         this.phone = obj.phone();

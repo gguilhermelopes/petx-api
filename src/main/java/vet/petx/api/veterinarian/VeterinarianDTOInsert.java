@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Pattern;
 import vet.petx.api.address.AddressDataDTO;
 import vet.petx.api.veterinarian.enums.Specialization;
 
-public record VeterinarianDTO(
+public record VeterinarianDTOInsert(
 
         @NotBlank
         String name,
@@ -26,4 +26,5 @@ public record VeterinarianDTO(
         @Valid
         AddressDataDTO address
 ) {
+
 }
