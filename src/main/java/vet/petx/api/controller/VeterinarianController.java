@@ -1,5 +1,6 @@
 package vet.petx.api.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ public class VeterinarianController {
 
     @PostMapping
     @Transactional
-    public void insert(@RequestBody VeterinarianDTO obj){
+    public void insert(@RequestBody @Valid VeterinarianDTO obj){
         repository.save(new Veterinarian(obj));
     }
 

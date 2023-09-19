@@ -10,6 +10,6 @@ CREATE TABLE veterinarians (
     city VARCHAR(100) NOT NULL,
     state CHAR(2) NOT NULL,
     number VARCHAR(20) NOT NULL,
-    complement VARCHAR(100) NOT NULL,
+    complement VARCHAR(100),
     PRIMARY KEY (id)
 );

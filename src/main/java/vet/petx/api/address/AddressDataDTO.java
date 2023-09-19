@@ -1,5 +1,21 @@
 package vet.petx.api.address;
 
-public record AddressDataDTO
-        (String street, String district, String cep, String city, String state, String number, String complement) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
+public record AddressDataDTO(
+        @NotBlank
+        String street,
+        @NotBlank
+        String district,
+        @NotBlank
+        @Pattern(regexp = "\\d{5}-\\d{3}|\\d{8}$")
+        String cep,
+        @NotBlank
+        String city,
+        @NotBlank
+        String state,
+        @NotBlank
+        String number,
+        String complement) {
 }
