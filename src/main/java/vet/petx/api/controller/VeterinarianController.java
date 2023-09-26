@@ -47,10 +47,17 @@ public class VeterinarianController {
         return ResponseEntity.ok().body(response);
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<VeterinarianDTODetails> listById(@PathVariable Long id){
+        Veterinarian vet = repository.getReferenceById(id);
+
+        return ResponseEntity.ok().body(new VeterinarianDTODetails(vet));
+    }
+
     @PutMapping
     @Transactional
     public ResponseEntity<VeterinarianDTODetails> update(@RequestBody @Valid VeterinarianDTOUpdate obj) {
-        var vet = repository.getReferenceById(obj.id());
+        Veterinarian vet = repository.getReferenceById(obj.id());
         vet.updateInfo(obj);
 
         return ResponseEntity.ok().body(new VeterinarianDTODetails(vet));
@@ -59,7 +66,7 @@ public class VeterinarianController {
     @DeleteMapping(value = "/{id}")
     @Transactional
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        var vet = repository.getReferenceById(id);
+        Veterinarian vet = repository.getReferenceById(id);
         vet.inactivateVet();
 
         return ResponseEntity.noContent().build();
