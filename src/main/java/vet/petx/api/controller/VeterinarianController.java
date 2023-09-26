@@ -8,13 +8,12 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import vet.petx.api.veterinarian.Veterinarian;
-import vet.petx.api.veterinarian.VeterinarianDTOInsert;
-import vet.petx.api.veterinarian.VeterinarianDTOList;
-import vet.petx.api.veterinarian.VeterinarianRepository;
+import vet.petx.api.veterinarian.*;
 
-import java.util.List;
 
+
+
+@CrossOrigin
 @RestController
 @RequestMapping("/veterinarians")
 public class VeterinarianController {
@@ -23,13 +22,25 @@ public class VeterinarianController {
 
     @PostMapping
     @Transactional
-    public void insert(@RequestBody @Valid VeterinarianDTOInsert obj){
+    public void insert(@RequestBody @Valid VeterinarianDTOInsert obj) {
         repository.save(new Veterinarian(obj));
     }
 
     @GetMapping
-    public Page<VeterinarianDTOList> list(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable){
+    public Page<VeterinarianDTOList> list(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable) {
         return repository.findAll(pageable).map(VeterinarianDTOList::new);
     }
 
+    @PutMapping
+    @Transactional
+    public void update(@RequestBody @Valid VeterinarianDTOUpdate obj) {
+        var vet = repository.getReferenceById(obj.id());
+        vet.updateInfo(obj);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    @Transactional
+    public void delete(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
 }

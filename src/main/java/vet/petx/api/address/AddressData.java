@@ -27,4 +27,14 @@ public class AddressData {
         this.number = address.number();
         this.complement = address.complement();
     }
+
+    public void updateInfo(AddressDataDTO obj) {
+        if(obj.street() != null) this.street = obj.street();
+        if (obj.city() != null) this.city = obj.city();
+        if (obj.district() != null) this.district = obj.district();
+        if (obj.cep() != null) this.cep = obj.cep();
+        if (obj.state() != null) this.state = obj.state();
+        if (obj.number() != null) this.number = obj.number();
+        if (obj.complement() != null) this.complement = obj.complement();
+    }
 }

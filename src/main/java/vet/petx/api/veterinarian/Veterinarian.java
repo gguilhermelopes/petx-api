@@ -35,4 +35,11 @@ public class Veterinarian {
         this.specialization = obj.specialization();
         this.address = new AddressData(obj.address());
     }
+
+    public void updateInfo(VeterinarianDTOUpdate obj) {
+        if(obj.name() != null) this.name = obj.name();
+        if(obj.phone() != null) this.phone = obj.phone();
+        if(obj.address() != null) this.address.updateInfo(obj.address());
+
+    }
 }
