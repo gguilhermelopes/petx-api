@@ -5,12 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 import vet.petx.api.veterinarian.*;
 
-
+import java.net.URI;
 
 
 @CrossOrigin
@@ -22,26 +25,43 @@ public class VeterinarianController {
 
     @PostMapping
     @Transactional
-    public void insert(@RequestBody @Valid VeterinarianDTOInsert obj) {
-        repository.save(new Veterinarian(obj));
+    public ResponseEntity<VeterinarianDTODetails> insert(
+            @RequestBody @Valid VeterinarianDTOInsert obj,
+            UriComponentsBuilder uriComponentsBuilder
+    ) {
+        Veterinarian vet = new Veterinarian(obj);
+        repository.save(vet);
+
+        URI uri =
+                uriComponentsBuilder.path("/veterinarians/{id}").
+                        buildAndExpand(vet.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new VeterinarianDTODetails(vet));
+
     }
 
     @GetMapping
-    public Page<VeterinarianDTOList> list(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable) {
-        return repository.findAllByActiveTrue(pageable).map(VeterinarianDTOList::new);
+    public ResponseEntity<Page<VeterinarianDTOList>> list(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable) {
+        var response = repository.findAllByActiveTrue(pageable).map(VeterinarianDTOList::new);
+
+        return ResponseEntity.ok().body(response);
     }
 
     @PutMapping
     @Transactional
-    public void update(@RequestBody @Valid VeterinarianDTOUpdate obj) {
+    public ResponseEntity<VeterinarianDTODetails> update(@RequestBody @Valid VeterinarianDTOUpdate obj) {
         var vet = repository.getReferenceById(obj.id());
         vet.updateInfo(obj);
+
+        return ResponseEntity.ok().body(new VeterinarianDTODetails(vet));
     }
 
     @DeleteMapping(value = "/{id}")
     @Transactional
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         var vet = repository.getReferenceById(id);
         vet.inactivateVet();
+
+        return ResponseEntity.noContent().build();
     }
 }
