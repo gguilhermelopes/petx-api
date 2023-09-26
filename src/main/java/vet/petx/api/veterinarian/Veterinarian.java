@@ -26,6 +26,7 @@ public class Veterinarian {
     private Specialization specialization;
     @Embedded
     private AddressData address;
+    private Boolean active;
 
     public Veterinarian(VeterinarianDTOInsert obj) {
         this.name = obj.name();
@@ -34,6 +35,7 @@ public class Veterinarian {
         this.crmv = obj.crmv();
         this.specialization = obj.specialization();
         this.address = new AddressData(obj.address());
+        this.active = true;
     }
 
     public void updateInfo(VeterinarianDTOUpdate obj) {
@@ -41,5 +43,9 @@ public class Veterinarian {
         if(obj.phone() != null) this.phone = obj.phone();
         if(obj.address() != null) this.address.updateInfo(obj.address());
 
+    }
+
+    public void inactivateVet() {
+        this.active = false;
     }
 }

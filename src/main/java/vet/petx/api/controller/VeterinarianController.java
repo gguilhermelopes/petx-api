@@ -28,7 +28,7 @@ public class VeterinarianController {
 
     @GetMapping
     public Page<VeterinarianDTOList> list(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable) {
-        return repository.findAll(pageable).map(VeterinarianDTOList::new);
+        return repository.findAllByActiveTrue(pageable).map(VeterinarianDTOList::new);
     }
 
     @PutMapping
@@ -41,6 +41,7 @@ public class VeterinarianController {
     @DeleteMapping(value = "/{id}")
     @Transactional
     public void delete(@PathVariable Long id) {
-        repository.deleteById(id);
+        var vet = repository.getReferenceById(id);
+        vet.inactivateVet();
     }
 }
