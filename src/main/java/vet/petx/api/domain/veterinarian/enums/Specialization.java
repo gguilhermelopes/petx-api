@@ -1,10 +1,10 @@
 package vet.petx.api.domain.veterinarian.enums;
 
 public enum Specialization {
-    CLINICA_GERAL(1),
-    CIRURGIA(2),
-    RADIOLOGIA(3),
-    PATOLOGIA(4);
+    CLINICA_GERAL(0),
+    CIRURGIA(1),
+    RADIOLOGIA(2),
+    PATOLOGIA(3);
 
     private int code;
     private Specialization(int code){

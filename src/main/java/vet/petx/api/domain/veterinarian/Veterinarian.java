@@ -10,7 +10,7 @@ import vet.petx.api.domain.address.AddressData;
 import vet.petx.api.domain.veterinarian.enums.Specialization;
 
 @Table(name = "veterinarians")
-@Entity(name = "veterinarian")
+@Entity(name = "Veterinarian")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
