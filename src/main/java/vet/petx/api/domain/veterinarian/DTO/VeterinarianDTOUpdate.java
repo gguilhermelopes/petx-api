@@ -1,4 +1,4 @@
-package vet.petx.api.domain.veterinarian;
+package vet.petx.api.domain.veterinarian.DTO;
 
 import jakarta.validation.constraints.NotNull;
 import vet.petx.api.domain.address.AddressDataDTO;

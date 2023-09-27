@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import vet.petx.api.domain.address.AddressData;
+import vet.petx.api.domain.veterinarian.DTO.VeterinarianDTOInsert;
+import vet.petx.api.domain.veterinarian.DTO.VeterinarianDTOUpdate;
 import vet.petx.api.domain.veterinarian.enums.Specialization;
 
 @Table(name = "veterinarians")

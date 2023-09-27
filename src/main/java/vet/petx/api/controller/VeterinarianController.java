@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.util.UriComponentsBuilder;
 import vet.petx.api.domain.veterinarian.*;
+import vet.petx.api.domain.veterinarian.DTO.VeterinarianDTODetails;
+import vet.petx.api.domain.veterinarian.DTO.VeterinarianDTOInsert;
+import vet.petx.api.domain.veterinarian.DTO.VeterinarianDTOList;
+import vet.petx.api.domain.veterinarian.DTO.VeterinarianDTOUpdate;
 
 import java.net.URI;
 
