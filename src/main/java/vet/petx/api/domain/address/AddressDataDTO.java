@@ -1,4 +1,4 @@
-package vet.petx.api.address;
+package vet.petx.api.domain.address;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

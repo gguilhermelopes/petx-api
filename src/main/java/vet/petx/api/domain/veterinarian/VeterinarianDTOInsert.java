@@ -1,12 +1,12 @@
-package vet.petx.api.veterinarian;
+package vet.petx.api.domain.veterinarian;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import vet.petx.api.address.AddressDataDTO;
-import vet.petx.api.veterinarian.enums.Specialization;
+import vet.petx.api.domain.address.AddressDataDTO;
+import vet.petx.api.domain.veterinarian.enums.Specialization;
 
 public record VeterinarianDTOInsert(
 

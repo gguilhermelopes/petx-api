@@ -9,9 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
-import vet.petx.api.veterinarian.*;
+import vet.petx.api.domain.veterinarian.*;
 
 import java.net.URI;
 
@@ -32,8 +31,7 @@ public class VeterinarianController {
         Veterinarian vet = new Veterinarian(obj);
         repository.save(vet);
 
-        URI uri =
-                uriComponentsBuilder.path("/veterinarians/{id}").
+        URI uri = uriComponentsBuilder.path("/veterinarians/{id}").
                         buildAndExpand(vet.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new VeterinarianDTODetails(vet));

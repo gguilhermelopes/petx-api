@@ -1,7 +1,7 @@
-package vet.petx.api.veterinarian;
+package vet.petx.api.domain.veterinarian;
 
-import vet.petx.api.address.AddressData;
-import vet.petx.api.veterinarian.enums.Specialization;
+import vet.petx.api.domain.address.AddressData;
+import vet.petx.api.domain.veterinarian.enums.Specialization;
 
 public record VeterinarianDTODetails(
         Long id,

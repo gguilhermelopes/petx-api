@@ -1,4 +1,4 @@
-package vet.petx.api.veterinarian.enums;
+package vet.petx.api.domain.veterinarian.enums;
 
 public enum Specialization {
     CLINICA_GERAL(1),

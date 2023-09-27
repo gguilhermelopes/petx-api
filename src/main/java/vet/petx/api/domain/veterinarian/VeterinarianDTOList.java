@@ -1,6 +1,6 @@
-package vet.petx.api.veterinarian;
+package vet.petx.api.domain.veterinarian;
 
-import vet.petx.api.veterinarian.enums.Specialization;
+import vet.petx.api.domain.veterinarian.enums.Specialization;
 
 public record VeterinarianDTOList(Long id, String name, String email, String crmv, Specialization specialization) {
 

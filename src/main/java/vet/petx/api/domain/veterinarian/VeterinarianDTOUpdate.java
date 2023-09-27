@@ -1,8 +1,7 @@
-package vet.petx.api.veterinarian;
+package vet.petx.api.domain.veterinarian;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import vet.petx.api.address.AddressDataDTO;
+import vet.petx.api.domain.address.AddressDataDTO;
 
 public record VeterinarianDTOUpdate(
         @NotNull

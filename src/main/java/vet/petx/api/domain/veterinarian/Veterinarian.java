@@ -1,4 +1,4 @@
-package vet.petx.api.veterinarian;
+package vet.petx.api.domain.veterinarian;
 
 
 import jakarta.persistence.*;
@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import vet.petx.api.address.AddressData;
-import vet.petx.api.veterinarian.enums.Specialization;
+import vet.petx.api.domain.address.AddressData;
+import vet.petx.api.domain.veterinarian.enums.Specialization;
 
 @Table(name = "veterinarians")
 @Entity(name = "veterinarian")
