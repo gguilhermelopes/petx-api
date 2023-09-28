@@ -12,20 +12,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vet.petx.api.domain.user.DTO.AuthDataDTO;
+import vet.petx.api.domain.user.User;
+import vet.petx.api.infra.security.TokenDataDTO;
+import vet.petx.api.infra.security.TokenService;
 
 @RestController
 @RequestMapping("/login")
 public class AuthController {
     @Autowired
     private AuthenticationManager manager;
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<Void> login(@RequestBody @Valid AuthDataDTO obj){
-        UsernamePasswordAuthenticationToken token =
+    public ResponseEntity<TokenDataDTO> login(@RequestBody @Valid AuthDataDTO obj){
+        UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(obj.email(), obj.password());
 
-        Authentication authentication = manager.authenticate(token);
+        Authentication authentication = manager.authenticate(authenticationToken);
 
-        return ResponseEntity.ok().build();
+        String JwtToken = tokenService.createToken((User) authentication.getPrincipal());
+
+        return ResponseEntity.ok().body(new TokenDataDTO(JwtToken));
     }
 }
