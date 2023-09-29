@@ -1,11 +1,10 @@
-package vet.petx.api.domain.pet.enums;
+package vet.petx.api.domain.user.enums;
 
-public enum Species {
-    CACHORRO(0),
-    GATO(1)
-;
+public enum UserRole {
+    ADMIN(0),
+    USER(1);
     private int code;
-    private Species(int code){
+    private UserRole(int code){
         this.code = code;
     }
 
@@ -13,8 +12,8 @@ public enum Species {
         return code;
     }
 
-    public static vet.petx.api.domain.pet.enums.Species valueOf(int code){
-        for(Species value : Species.values()){
+    public static vet.petx.api.domain.user.enums.UserRole valueOf(int code){
+        for(UserRole value : UserRole.values()){
             if(value.getCode() == code){
                 return value;
             }
