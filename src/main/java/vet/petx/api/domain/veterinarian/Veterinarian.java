@@ -7,8 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import vet.petx.api.domain.address.AddressData;
-import vet.petx.api.domain.veterinarian.DTO.VeterinarianDTOInsert;
-import vet.petx.api.domain.veterinarian.DTO.VeterinarianDTOUpdate;
+import vet.petx.api.domain.veterinarian.DTO.VeterinarianInsertDTO;
+import vet.petx.api.domain.veterinarian.DTO.VeterinarianUpdateDTO;
 import vet.petx.api.domain.veterinarian.enums.Specialization;
 
 @Table(name = "veterinarians")
@@ -30,7 +30,7 @@ public class Veterinarian {
     private AddressData address;
     private Boolean active;
 
-    public Veterinarian(VeterinarianDTOInsert obj) {
+    public Veterinarian(VeterinarianInsertDTO obj) {
         this.name = obj.name();
         this.email = obj.email();
         this.phone = obj.phone();
@@ -40,10 +40,11 @@ public class Veterinarian {
         this.active = true;
     }
 
-    public void updateInfo(VeterinarianDTOUpdate obj) {
+    public void updateInfo(VeterinarianUpdateDTO obj) {
         if(obj.name() != null) this.name = obj.name();
         if(obj.phone() != null) this.phone = obj.phone();
         if(obj.address() != null) this.address.updateInfo(obj.address());
+        if(obj.active() != null) this.active = obj.active();
 
     }
 

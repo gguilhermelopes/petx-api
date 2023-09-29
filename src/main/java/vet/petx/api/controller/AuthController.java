@@ -47,13 +47,12 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<Void> register(@RequestBody @Valid RegisterDataDTO obj, UriComponentsBuilder uriComponentsBuilder){
-        if(this.userRepository.findByEmail(obj.email()) != null) return ResponseEntity.badRequest().build();
+        if(userRepository.findByEmail(obj.email()) != null)
+            return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(obj.password());
-
         User newUser = new User(obj.email(), encryptedPassword, obj.role());
-
-        this.userRepository.save(newUser);
+        userRepository.save(newUser);
 
         URI uri = uriComponentsBuilder.path("/users/{id}")
                 .buildAndExpand(newUser.getId()).toUri();

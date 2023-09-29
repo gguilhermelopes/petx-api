@@ -3,9 +3,9 @@ package vet.petx.api.domain.veterinarian.DTO;
 import vet.petx.api.domain.veterinarian.Veterinarian;
 import vet.petx.api.domain.veterinarian.enums.Specialization;
 
-public record VeterinarianDTOList(Long id, String name, String email, String crmv, Specialization specialization) {
+public record VeterinarianListDTO(Long id, String name, String email, String crmv, Specialization specialization) {
 
-    public VeterinarianDTOList(Veterinarian veterinarian){
+    public VeterinarianListDTO(Veterinarian veterinarian){
         this(
                 veterinarian.getId(),
                 veterinarian.getName(),
