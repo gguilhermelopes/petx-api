@@ -18,4 +18,5 @@ public record AddressDataDTO(
         @NotBlank
         String number,
         String complement) {
+
 }

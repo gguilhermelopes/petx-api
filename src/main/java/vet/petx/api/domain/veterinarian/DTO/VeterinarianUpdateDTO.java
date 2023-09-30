@@ -10,4 +10,5 @@ public record VeterinarianUpdateDTO(
         Boolean active
 ) {
 
+
 }

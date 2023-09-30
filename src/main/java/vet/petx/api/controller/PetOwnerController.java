@@ -61,6 +61,7 @@ public class PetOwnerController {
     @PutMapping(value = "/{id}")
     @Transactional
     public ResponseEntity<PetOwnerDetailsDTO> update(@PathVariable Long id, @RequestBody @Valid PetOwnerUpdateDTO obj){
+
         PetOwner petOwner = repository.getReferenceById(id);
         petOwner.updateInfo(obj);
 
