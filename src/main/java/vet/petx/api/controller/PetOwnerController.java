@@ -45,7 +45,7 @@ public class PetOwnerController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<PetOwnerDetailsDTO> listById(@PathVariable Long id){
 
-        return ResponseEntity.ok().body(service.FindBydId(id));
+        return ResponseEntity.ok().body(service.findBydId(id));
     }
 
     @PutMapping(value = "/{id}")

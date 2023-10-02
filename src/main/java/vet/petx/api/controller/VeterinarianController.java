@@ -10,7 +10,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import vet.petx.api.domain.veterinarian.*;
 import vet.petx.api.domain.veterinarian.DTO.VeterinarianDetailsDTO;
 import vet.petx.api.domain.veterinarian.DTO.VeterinarianInsertDTO;
-import vet.petx.api.domain.veterinarian.DTO.VeterinarianListDTO;
 import vet.petx.api.domain.veterinarian.DTO.VeterinarianUpdateDTO;
 
 import java.net.URI;
@@ -22,7 +21,7 @@ import java.util.List;
 @RequestMapping("/veterinarians")
 public class VeterinarianController {
     @Autowired
-    private VeterinarianRepository repository;
+    private VeterinarianService service;
 
     @PostMapping
     @Transactional
@@ -30,48 +29,38 @@ public class VeterinarianController {
             @RequestBody @Valid VeterinarianInsertDTO obj,
             UriComponentsBuilder uriComponentsBuilder
     ) {
-        Veterinarian vet = new Veterinarian(obj);
-        repository.save(vet);
+        VeterinarianDetailsDTO vet = service.insert(obj);
 
         URI uri = uriComponentsBuilder.path("/veterinarians/{id}").
-                        buildAndExpand(vet.getId()).toUri();
+                        buildAndExpand(vet.id()).toUri();
 
-        return ResponseEntity.created(uri).body(new VeterinarianDetailsDTO(vet));
+        return ResponseEntity.created(uri).body(vet);
 
     }
 
     @GetMapping
-    public ResponseEntity<List<VeterinarianListDTO>> list() {
-        List<VeterinarianListDTO> veterinarianList = repository.findAll()
-                .stream()
-                .filter(Veterinarian::getActive)
-                .map(VeterinarianListDTO::new)
-                .toList();
+    public ResponseEntity<List<VeterinarianDetailsDTO>> list() {
 
-        return ResponseEntity.ok().body(veterinarianList);
+        return ResponseEntity.ok().body(service.listAll());
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<VeterinarianDetailsDTO> listById(@PathVariable Long id){
-        Veterinarian vet = repository.getReferenceById(id);
 
-        return ResponseEntity.ok().body(new VeterinarianDetailsDTO(vet));
+        return ResponseEntity.ok().body(service.findBydId(id));
     }
 
     @PutMapping(value = "/{id}")
     @Transactional
     public ResponseEntity<VeterinarianDetailsDTO> update(@PathVariable Long id, @RequestBody @Valid VeterinarianUpdateDTO obj) {
-        Veterinarian vet = repository.getReferenceById(id);
-        vet.updateInfo(obj);
 
-        return ResponseEntity.ok().body(new VeterinarianDetailsDTO(vet));
+        return ResponseEntity.ok().body(service.update(id, obj));
     }
 
     @DeleteMapping(value = "/{id}")
     @Transactional
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        Veterinarian vet = repository.getReferenceById(id);
-        vet.inactivateVet();
+        service.deleteById(id);
 
         return ResponseEntity.noContent().build();
     }

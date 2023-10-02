@@ -2,8 +2,6 @@ package vet.petx.api.domain.petOwner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vet.petx.api.domain.pet.DTO.PetDetailsDTO;
-import vet.petx.api.domain.pet.Pet;
 import vet.petx.api.domain.petOwner.DTO.PetOwnerDetailsDTO;
 import vet.petx.api.domain.petOwner.DTO.PetOwnerInsertDTO;
 import vet.petx.api.domain.petOwner.DTO.PetOwnerUpdateDTO;
@@ -31,7 +29,7 @@ public class PetOwnerService {
                 .toList();
     }
 
-    public PetOwnerDetailsDTO FindBydId(Long id){
+    public PetOwnerDetailsDTO findBydId(Long id){
         Optional<PetOwner> petOwner = repository.findById(id);
 
         return new PetOwnerDetailsDTO(petOwner.orElseThrow(() -> new RuntimeException("Invalid id provided.")));

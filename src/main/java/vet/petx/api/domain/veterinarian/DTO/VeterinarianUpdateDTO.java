@@ -11,4 +11,7 @@ public record VeterinarianUpdateDTO(
 ) {
 
 
+    public boolean areAllPropertiesNull() {
+        return name == null && phone == null && address == null && active == null;
+    }
 }
