@@ -10,7 +10,7 @@ public record PetOwnerUpdateDTO(
         AddressDataDTO address,
         Boolean active
 ) {
-    public boolean allPropertiesAreNull() {
+    public boolean areAllPropertiesNull() {
         return name == null && email == null && cpf == null && address == null && active == null;
     }
 }

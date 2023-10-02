@@ -11,7 +11,7 @@ import vet.petx.api.domain.petOwner.DTO.PetOwnerInsertDTO;
 import vet.petx.api.domain.petOwner.DTO.PetOwnerUpdateDTO;
 import vet.petx.api.domain.petOwner.PetOwner;
 import vet.petx.api.domain.petOwner.PetOwnerRepository;
-
+import vet.petx.api.domain.petOwner.PetOwnerService;
 
 
 import java.net.URI;
@@ -22,58 +22,43 @@ import java.util.List;
 @RequestMapping("/pet_owners")
 public class PetOwnerController {
     @Autowired
-    private PetOwnerRepository repository;
+    private PetOwnerService service;
 
     @PostMapping
     @Transactional
-    public ResponseEntity<PetOwnerDetailsDTO> insert(
-            @RequestBody @Valid PetOwnerInsertDTO obj,
-            UriComponentsBuilder uriComponentsBuilder
-    ) {
-        PetOwner petOwner = new PetOwner(obj);
-        repository.save(petOwner);
+    public ResponseEntity<PetOwnerDetailsDTO> insert(@RequestBody @Valid PetOwnerInsertDTO obj, UriComponentsBuilder uriComponentsBuilder) {
+       PetOwnerDetailsDTO petOwner = service.insert(obj);
 
         URI uri = uriComponentsBuilder.path("/pet_owners/{id}").
-                buildAndExpand(petOwner.getId()).toUri();
+                buildAndExpand(petOwner.id()).toUri();
 
-        return ResponseEntity.created(uri).body(new PetOwnerDetailsDTO(petOwner));
+        return ResponseEntity.created(uri).body(petOwner);
 
     }
 
     @GetMapping
     public ResponseEntity<List<PetOwnerDetailsDTO>> list(){
-        List<PetOwnerDetailsDTO> petOwnerList = repository.findAll()
-                .stream()
-                .filter(PetOwner::getActive)
-                .map(PetOwnerDetailsDTO::new)
-                .toList();
 
-        return ResponseEntity.ok().body(petOwnerList);
+         return ResponseEntity.ok().body(service.listAll());
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<PetOwnerDetailsDTO> listById(@PathVariable Long id){
-        PetOwner petOwner = repository.getReferenceById(id);
 
-        return ResponseEntity.ok().body(new PetOwnerDetailsDTO(petOwner));
+        return ResponseEntity.ok().body(service.FindBydId(id));
     }
 
     @PutMapping(value = "/{id}")
     @Transactional
     public ResponseEntity<PetOwnerDetailsDTO> update(@PathVariable Long id, @RequestBody @Valid PetOwnerUpdateDTO obj){
 
-        PetOwner petOwner = repository.getReferenceById(id);
-        petOwner.updateInfo(obj);
-
-        return ResponseEntity.ok().body(new PetOwnerDetailsDTO(petOwner));
+        return ResponseEntity.ok().body(service.update(id, obj));
     }
 
     @DeleteMapping(value = "/{id}")
     @Transactional
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        PetOwner petOwner = repository.getReferenceById(id);
-        petOwner.inactivateVet();
-
+        service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 

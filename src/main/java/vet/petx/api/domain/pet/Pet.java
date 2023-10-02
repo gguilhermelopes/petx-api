@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import vet.petx.api.domain.pet.DTO.PetUpdateDTO;
 import vet.petx.api.domain.pet.enums.Species;
-import vet.petx.api.domain.petOwner.DTO.PetOwnerUpdateDTO;
 import vet.petx.api.domain.petOwner.PetOwner;
 
 @Table(name = "pets")

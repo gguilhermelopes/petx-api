@@ -9,7 +9,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import vet.petx.api.domain.pet.DTO.PetDetailsDTO;
 import vet.petx.api.domain.pet.DTO.PetInsertDTO;
 import vet.petx.api.domain.pet.DTO.PetUpdateDTO;
-import vet.petx.api.domain.pet.PetRepository;
 import vet.petx.api.domain.pet.PetService;
 
 import java.net.URI;
@@ -25,7 +24,7 @@ public class PetController {
     @PostMapping
     @Transactional
     public ResponseEntity<PetDetailsDTO> insert(@RequestBody @Valid PetInsertDTO obj, UriComponentsBuilder uriComponentsBuilder){
-        PetDetailsDTO pet = new PetDetailsDTO(service.insert(obj));
+        PetDetailsDTO pet = service.insert(obj);
 
         URI uri = uriComponentsBuilder.path("/pets/{id}")
                 .buildAndExpand(pet.id()).toUri();
@@ -41,7 +40,6 @@ public class PetController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<PetDetailsDTO> listById(@PathVariable Long id){
-
 
         return ResponseEntity.ok().body(service.FindBydId(id));
     }

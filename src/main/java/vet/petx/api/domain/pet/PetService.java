@@ -17,7 +17,7 @@ public class PetService {
     private PetRepository petRepository;
     @Autowired
     private PetOwnerRepository petOwnerRepository;
-    public Pet insert(PetInsertDTO obj){
+    public PetDetailsDTO insert(PetInsertDTO obj){
 
         Optional<PetOwner> petOwner = petOwnerRepository.findById(obj.petOwnerId());
         if(petOwner.isEmpty()) throw new RuntimeException("Couldn't find pet owner with provided id.");
@@ -35,33 +35,33 @@ public class PetService {
 
         petRepository.save(pet);
 
-        return pet;
+        return new PetDetailsDTO(pet);
     }
 
     public List<PetDetailsDTO> listAll(){
-        List<PetDetailsDTO> petList = petRepository.findAll()
+
+        return petRepository.findAll()
                 .stream()
                 .filter(pet -> pet.getPetOwner().getActive())
                 .map(PetDetailsDTO::new)
                 .toList();
-
-        return petList;
     }
 
     public PetDetailsDTO FindBydId(Long id){
-        Pet pet = petRepository.getReferenceById(id);
+        Optional<Pet> pet = petRepository.findById(id);
 
-        return new PetDetailsDTO(pet);
+        return new PetDetailsDTO(pet.orElseThrow(() -> new RuntimeException("Invalid id provided.")));
     }
 
     public PetDetailsDTO update(Long id, PetUpdateDTO obj){
-        Optional<Pet> pet = petRepository.findById(id);
-        if(pet.isEmpty()) throw new RuntimeException("Invalid id provided.");
+        Pet pet = petRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Invalid id provided."));
 
         if(obj.areAllPropertiesNull()) throw new RuntimeException("Invalid properties provided.");
 
-        pet.get().updateInfo(obj);
+        pet.updateInfo(obj);
 
-        return new PetDetailsDTO(pet.get());
+        return new PetDetailsDTO(pet);
     }
 }
