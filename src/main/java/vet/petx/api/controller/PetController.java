@@ -50,4 +50,11 @@ public class PetController {
 
         return ResponseEntity.ok().body(service.update(id, obj));
     }
+
+    @DeleteMapping(value = "/{id}")
+    @Transactional
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
