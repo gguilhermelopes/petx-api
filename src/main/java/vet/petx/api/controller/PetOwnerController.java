@@ -9,8 +9,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import vet.petx.api.domain.petOwner.DTO.PetOwnerDetailsDTO;
 import vet.petx.api.domain.petOwner.DTO.PetOwnerInsertDTO;
 import vet.petx.api.domain.petOwner.DTO.PetOwnerUpdateDTO;
-import vet.petx.api.domain.petOwner.PetOwner;
-import vet.petx.api.domain.petOwner.PetOwnerRepository;
 import vet.petx.api.domain.petOwner.PetOwnerService;
 
 
