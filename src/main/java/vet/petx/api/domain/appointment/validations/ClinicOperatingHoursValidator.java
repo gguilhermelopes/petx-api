@@ -16,6 +16,6 @@ public class ClinicOperatingHoursValidator implements AppointmentValidator {
         if(appointmentDateTime.equals(DayOfWeek.SUNDAY)
                 || appointmentDateTime.getHour() < 7
                 || appointmentDateTime.getHour() > 18)
-            throw new ValidationException("Date/Time provided is outside of operating hours.");
+            throw new ValidationException("Date/time provided is outside of operating hours.");
     }
 }

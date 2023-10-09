@@ -1,5 +1,6 @@
 package vet.petx.api.domain.appointment;
 
+import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vet.petx.api.domain.appointment.DTO.AppointmentDetailsDTO;
@@ -32,6 +33,8 @@ public class AppointmentService {
         validators.forEach(validator -> validator.validate(obj));
 
         Veterinarian veterinarian = pickVeterinarian(obj);
+
+        if(veterinarian == null) throw new ValidationException("No veterinarians available for the date/time provided.");
 
         Pet pet = petRepository
                 .findById(obj.petId())
