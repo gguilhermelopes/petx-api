@@ -11,7 +11,7 @@ import vet.petx.api.domain.veterinarian.Veterinarian;
 import java.time.LocalDateTime;
 
 @Table(name = "appointments")
-@Entity(name = "appointment")
+@Entity(name = "Appointment")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

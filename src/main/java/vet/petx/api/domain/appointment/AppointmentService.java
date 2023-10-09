@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vet.petx.api.domain.appointment.DTO.AppointmentDetailsDTO;
 import vet.petx.api.domain.appointment.DTO.AppointmentScheduleDTO;
+import vet.petx.api.domain.appointment.validations.AppointmentValidator;
 import vet.petx.api.domain.exceptions.ResourceNotFoundException;
 import vet.petx.api.domain.pet.Pet;
 import vet.petx.api.domain.pet.PetRepository;
 import vet.petx.api.domain.veterinarian.Veterinarian;
 import vet.petx.api.domain.veterinarian.VeterinarianRepository;
+
+import java.util.List;
 
 @Service
 public class AppointmentService {
@@ -18,10 +21,15 @@ public class AppointmentService {
     VeterinarianRepository veterinarianRepository;
     @Autowired
     PetRepository petRepository;
+
+    @Autowired
+    private List<AppointmentValidator> validators;
     public AppointmentDetailsDTO scheduleAppointment(AppointmentScheduleDTO obj) {
 
-        if(obj.veterinarianId() != null && veterinarianRepository.existsById(obj.veterinarianId()))
+        if(obj.veterinarianId() != null && !veterinarianRepository.existsById(obj.veterinarianId()))
             throw new ResourceNotFoundException("Invalid veterinarian_id provided.");
+
+        validators.forEach(validator -> validator.validate(obj));
 
         Veterinarian veterinarian = pickVeterinarian(obj);
 
@@ -32,11 +40,7 @@ public class AppointmentService {
         Appointment appointment = new Appointment(null, veterinarian, pet, obj.dateTime());
         appointmentRepository.save(appointment);
 
-        return new AppointmentDetailsDTO(
-                appointment.getId(),
-                appointment.getVeterinarian().getId(),
-                appointment.getPet().getId(),
-                appointment.getDateTime());
+        return new AppointmentDetailsDTO(appointment);
     }
 
     private Veterinarian pickVeterinarian(AppointmentScheduleDTO obj) {

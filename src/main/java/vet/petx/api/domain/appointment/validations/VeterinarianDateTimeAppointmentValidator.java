@@ -1,10 +1,14 @@
 package vet.petx.api.domain.appointment.validations;
 
 import jakarta.validation.ValidationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import vet.petx.api.domain.appointment.AppointmentRepository;
 import vet.petx.api.domain.appointment.DTO.AppointmentScheduleDTO;
 
-public class VeterinarianDateTimeAppointmentValidator {
+@Component
+public class VeterinarianDateTimeAppointmentValidator implements AppointmentValidator {
+    @Autowired
     private AppointmentRepository repository;
 
     public void validate(AppointmentScheduleDTO obj){

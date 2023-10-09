@@ -19,8 +19,8 @@ public class AppointmentController {
     private AppointmentService service;
     @PostMapping
     @Transactional
-    public void schedule(@RequestBody @Valid AppointmentScheduleDTO obj){
-       service.scheduleAppointment(obj);
+    public ResponseEntity<AppointmentDetailsDTO> schedule(@RequestBody @Valid AppointmentScheduleDTO obj){
+       return ResponseEntity.ok().body(service.scheduleAppointment(obj));
 
     }
 }

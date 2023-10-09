@@ -24,7 +24,7 @@ public interface VeterinarianRepository extends JpaRepository<Veterinarian, Long
                     a.dateTime = :dateTime
                 )
             ORDER BY RAND()
-            LIMIT 1;
+            LIMIT 1
             """)
     Veterinarian pickRandomVeterinarian(LocalDateTime dateTime);
 }

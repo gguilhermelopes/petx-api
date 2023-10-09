@@ -1,12 +1,14 @@
 package vet.petx.api.domain.appointment.validations;
 
 import jakarta.validation.ValidationException;
+import org.springframework.stereotype.Component;
 import vet.petx.api.domain.appointment.DTO.AppointmentScheduleDTO;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class AppointmentAdvanceTimeValidator {
+@Component
+public class AppointmentAdvanceTimeValidator implements AppointmentValidator {
 
     public void validate(AppointmentScheduleDTO obj) {
         LocalDateTime appointmentDateTime = obj.dateTime();
