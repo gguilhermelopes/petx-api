@@ -1,5 +1,6 @@
 package vet.petx.api.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +11,10 @@ import vet.petx.api.domain.appointment.DTO.AppointmentDetailsDTO;
 import vet.petx.api.domain.appointment.DTO.AppointmentScheduleDTO;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/appointments")
+@SecurityRequirement(name = "bearer-key")
 public class AppointmentController {
     @Autowired
     private AppointmentService service;

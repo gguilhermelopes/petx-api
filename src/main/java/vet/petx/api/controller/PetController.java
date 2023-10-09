@@ -1,5 +1,6 @@
 package vet.petx.api.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/pets")
+@SecurityRequirement(name = "bearer-key")
 public class PetController {
     @Autowired
     private PetService service;
