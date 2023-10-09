@@ -68,9 +68,9 @@ public class PetService {
     public void deleteById(Long id) {
        Optional<Pet> pet = petRepository.findById(id);
        if(pet.isEmpty()) throw new RuntimeException("Invalid id provided.");
-       try{
+       try {
            petRepository.deleteById(pet.get().getId());
-       }catch (RuntimeException e){
+       } catch (RuntimeException e){
            throw new RuntimeException(e.getMessage());
        }
     }

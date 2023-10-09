@@ -13,6 +13,7 @@ import vet.petx.api.domain.veterinarian.Veterinarian;
 import vet.petx.api.domain.veterinarian.VeterinarianRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AppointmentService {
@@ -45,6 +46,25 @@ public class AppointmentService {
 
         return new AppointmentDetailsDTO(appointment);
     }
+
+    public List<AppointmentDetailsDTO> listAll(){
+        return appointmentRepository.findAll()
+                .stream()
+                .map(AppointmentDetailsDTO::new)
+                .toList();
+    }
+
+    public void deleteById(Long id){
+        Optional<Appointment> appointment = appointmentRepository.findById(id);
+        if(appointment.isEmpty()) throw new RuntimeException("Invalid id provided.");
+
+        try {
+            appointmentRepository.deleteById(appointment.get().getId());
+        } catch (RuntimeException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 
     private Veterinarian pickVeterinarian(AppointmentScheduleDTO obj) {
         if(obj.veterinarianId() != null)

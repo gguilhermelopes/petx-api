@@ -4,13 +4,12 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vet.petx.api.domain.appointment.AppointmentService;
 import vet.petx.api.domain.appointment.DTO.AppointmentDetailsDTO;
 import vet.petx.api.domain.appointment.DTO.AppointmentScheduleDTO;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/appointments")
@@ -23,4 +22,18 @@ public class AppointmentController {
        return ResponseEntity.ok().body(service.scheduleAppointment(obj));
 
     }
+
+    @GetMapping
+    public ResponseEntity<List<AppointmentDetailsDTO>> list(){
+        return ResponseEntity.ok().body(service.listAll());
+    }
+
+    @DeleteMapping(value = "/{id}")
+    @Transactional
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }
