@@ -15,7 +15,7 @@ import vet.petx.api.domain.pet.PetService;
 import java.net.URI;
 import java.util.List;
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/pets")
 @SecurityRequirement(name = "bearer-key")

@@ -11,7 +11,7 @@ import vet.petx.api.domain.appointment.DTO.AppointmentDetailsDTO;
 import vet.petx.api.domain.appointment.DTO.AppointmentScheduleDTO;
 
 import java.util.List;
-@CrossOrigin
+
 @RestController
 @RequestMapping("/appointments")
 @SecurityRequirement(name = "bearer-key")

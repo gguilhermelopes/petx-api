@@ -17,7 +17,7 @@ import java.net.URI;
 import java.util.List;
 
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/veterinarians")
 @SecurityRequirement(name = "bearer-key")
