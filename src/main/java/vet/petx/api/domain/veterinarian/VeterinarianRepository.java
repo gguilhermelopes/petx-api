@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 
 public interface VeterinarianRepository extends JpaRepository<Veterinarian, Long> {
 
-    Page<Veterinarian> findAllByActiveTrue(Pageable pageable);
-
     @Query("""
             SELECT v FROM Veterinarian v
             WHERE
