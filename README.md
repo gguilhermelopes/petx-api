@@ -35,6 +35,9 @@ git clone https://github.com/gguilhermelopes/petx-api.git
 1. Iniciar aplicação.
 2. A API estará disponível em `http://localhost:8080`.
 
+## Endpoints da API
+Para a documentação completa da API, e com a aplicação iniciada, acesse `http://localhost:8080/swagger-ui/index.html#/`
+
 ## Autenticação
 A API utiliza o Spring Security para o controle de autenticação com os seguintes roles:
 
