@@ -50,4 +50,4 @@ O projeto utiliza o [MySQL](https://dev.mysql.com/doc/refman/8.1/en/installing.h
 
 Contribuições são bem-vindas! Se você encontrar algum problema ou tiver sugestões para melhorias, por favor, abra uma issue ou envie um pull request para o repositório.
 
-Ao contribuir para este projeto, por favor, siga o estilo de código existente. [commit conventions](https://www.conventionalcommits.org/en/v1.0.0/), e envie suas mudanças numa branch separada.
+Ao contribuir para este projeto, por favor, siga o estilo de código existente. Utilize, também, as [commit conventions](https://www.conventionalcommits.org/en/v1.0.0/), e envie suas mudanças numa branch separada.
